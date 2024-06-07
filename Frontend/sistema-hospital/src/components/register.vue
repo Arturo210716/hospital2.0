@@ -18,31 +18,27 @@
             
             <div class="w-max md:w-1/4 p-4">
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700">
-                    <Usuario></Usuario>
+                    <usuario></usuario>
                 </div>
             </div>
             <div class="w-max md:w-1/4 p-4">
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700">
-                    <Personas></Personas>
+                    <personas></personas>
                     
                 </div>
             </div>
         </div>
 
-
-
-
-
 </template>
 
 <script>
-    import Personas from './registerPersona.vue'
-    import Usuario from './registerUser.vue'
+    import personas from './registerPersona.vue'
+    import usuario from './registerUser.vue'
 
     export default{
         components:{
-            Personas,
-            Usuario
+            personas,
+            usuario
         }
     }
 </script>
