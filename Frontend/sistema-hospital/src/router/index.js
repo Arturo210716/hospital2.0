@@ -5,6 +5,7 @@ import dashboard from '@/components/dashboard.vue'
 import registerP from '@/components/registerPersona.vue'
 import register from '@/components/register.vue'
 import cita from '@/components/citas.vue'
+import listarCitas from '@/components/listarCitas.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,15 +21,6 @@ const router = createRouter({
       component: registerUser
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: dashboard,
-      children:[
-        {path:'/registerP', name: 'personas',component:registerP},
-        {path:'/cita', name:'cita', component:cita}
-      ]
-    },
-    {
       path: '/registerP',
       name: 'registerP',
       component: registerP
@@ -38,6 +30,17 @@ const router = createRouter({
       name: 'register',
       component: register
     },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: dashboard,
+      children:[
+        {path:'/registerP', name: 'personas',component:registerP},
+        {path:'/cita', name:'cita', component:cita},
+        {path:'/listarCitas', name:'listarCitas', component:listarCitas}
+        
+      ]
+    }
     
   ]
 })
