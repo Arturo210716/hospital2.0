@@ -6,6 +6,8 @@ import registerP from '@/components/registerPersona.vue'
 import register from '@/components/register.vue'
 import cita from '@/components/citas.vue'
 import listarCitas from '@/components/listarCitas.vue'
+import recetaMedica from '../components/recetaMedica.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,7 +39,8 @@ const router = createRouter({
       children:[
         {path:'/registerP', name: 'personas',component:registerP},
         {path:'/cita', name:'cita', component:cita},
-        {path:'/listarCitas', name:'listarCitas', component:listarCitas}
+        {path:'/listarCitas', name:'listarCitas', component:listarCitas},
+        {path:'/receta', name:'receta', component: recetaMedica }
         
       ]
     }
