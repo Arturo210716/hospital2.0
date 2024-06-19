@@ -83,7 +83,9 @@
                         <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-blue-100 dark:text-white dark:hover:bg-gray-700">Expediente Medico</a>
                     </li>
                     <li>
+                        <router-link to="/receta">
                         <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-blue-100 dark:text-white dark:hover:bg-gray-700">Recetas Médicas</a>
+                    </router-link>
                     </li>
                 </ul>
             </li>

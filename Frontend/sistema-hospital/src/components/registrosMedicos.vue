@@ -10,7 +10,11 @@
             <div class="w-max md:w-1/8 p-4">
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700">
                     <listarCitas></listarCitas>
-                    
+                </div>
+            </div>
+            <div class="w-max md:w-1/4 p-4">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700">
+                    <Recetas></Recetas>
                 </div>
             </div>
         </div>
@@ -21,11 +25,13 @@
 
 import citas from './citas.vue'
 import listarCitas from './listarCitas.vue'
+import Recetas from './recetaMedica.vue'
 
 export default{
     components:{
         citas,
-        listarCitas
+        listarCitas,
+        Recetas
     }
 }
 </script>
