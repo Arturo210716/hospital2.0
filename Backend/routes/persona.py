@@ -46,6 +46,7 @@ def delete_persona(id_persona: int):
         if persona.id == id_persona:
             del personas[i]
             return f"Dato con ID {id_persona} eliminado correctamente."
+    return f"No existe alguna persona con ese id: {id_persona} "
 
 @persona.put('/personas/{id_persona}')
 def update_persona(id_persona: int, datos_persona: model_personas):
@@ -62,9 +63,10 @@ def update_persona(id_persona: int, datos_persona: model_personas):
             persona.fecha_nacimiento = datos_persona.fecha_nacimiento
             persona.curp = datos_persona.curp
             persona.tipo_sangre = datos_persona.tipo_sangre
-            persona.estatus = datos_persona.estatus
+            
             
             return f"Dato con ID {id_persona} actualizado correctamente."
+    return f"No existe alguna persona con ese id: {id_persona} "
 
 @persona.get('/personas/{id_persona}')
 def get_persona(id_persona: int):
@@ -74,3 +76,5 @@ def get_persona(id_persona: int):
     for persona in personas:
         if persona.id == id_persona:
             return persona
+
+    return f"No existe alguna persona con ese id: {id_persona} "
