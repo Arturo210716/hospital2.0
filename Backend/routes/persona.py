@@ -65,3 +65,12 @@ def update_persona(id_persona: int, datos_persona: model_personas):
             persona.estatus = datos_persona.estatus
             
             return f"Dato con ID {id_persona} actualizado correctamente."
+
+@persona.get('/personas/{id_persona}')
+def get_persona(id_persona: int):
+    global personas
+    
+    # Buscar la persona por su ID
+    for persona in personas:
+        if persona.id == id_persona:
+            return persona
