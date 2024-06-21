@@ -34,3 +34,34 @@ def getPersonas():
 def save_persona(datos_persona:model_personas):
     personas.append(datos_persona)
     return "Datos guardados correctamente"
+
+
+@persona.delete('/personas/{id_persona}')
+
+def delete_persona(id_persona: int):
+    global personas
+    
+    # Buscar la persona por su ID
+    for i, persona in enumerate(personas):
+        if persona.id == id_persona:
+            del personas[i]
+            return f"Dato con ID {id_persona} eliminado correctamente."
+
+@persona.put('/personas/{id_persona}')
+def update_persona(id_persona: int, datos_persona: model_personas):
+    global personas
+    
+    # Buscar la persona por su ID
+    for persona in personas:
+        if persona.id == id_persona:
+            # Actualizar los campos de la persona
+            persona.nombre = datos_persona.nombre
+            persona.primer_apellido = datos_persona.primer_apellido
+            persona.segundo_apellido = datos_persona.segundo_apellido
+            persona.edad = datos_persona.edad
+            persona.fecha_nacimiento = datos_persona.fecha_nacimiento
+            persona.curp = datos_persona.curp
+            persona.tipo_sangre = datos_persona.tipo_sangre
+            persona.estatus = datos_persona.estatus
+            
+            return f"Dato con ID {id_persona} actualizado correctamente."
