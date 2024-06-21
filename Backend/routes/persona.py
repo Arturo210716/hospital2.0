@@ -29,6 +29,17 @@ def bienvenido():
 def getPersonas():
     return personas
 
+@persona.get('/personas/{id_persona}')
+def get_persona(id_persona: int):
+    global personas
+    
+    # Buscar la persona por su ID
+    for persona in personas:
+        if persona.id == id_persona:
+            return persona
+
+    return f"No existe alguna persona con ese id: {id_persona} "
+
 @persona.post('/personas')
 
 def save_persona(datos_persona:model_personas):
@@ -68,13 +79,3 @@ def update_persona(id_persona: int, datos_persona: model_personas):
             return f"Dato con ID {id_persona} actualizado correctamente."
     return f"No existe alguna persona con ese id: {id_persona} "
 
-@persona.get('/personas/{id_persona}')
-def get_persona(id_persona: int):
-    global personas
-    
-    # Buscar la persona por su ID
-    for persona in personas:
-        if persona.id == id_persona:
-            return persona
-
-    return f"No existe alguna persona con ese id: {id_persona} "
