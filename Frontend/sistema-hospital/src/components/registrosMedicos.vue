@@ -23,9 +23,9 @@
 
 <script>
 
-import citas from './citas.vue'
-import listarCitas from './listarCitas.vue'
-import Recetas from './recetaMedica.vue'
+import citas from './citasForm.vue'
+import listarCitas from './citasList.vue'
+import Recetas from './recetaMedicaForm.vue'
 
 export default{
     components:{

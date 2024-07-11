@@ -4,10 +4,10 @@ import registerUser from '@/components/registerUser.vue'
 import dashboard from '@/components/dashboard.vue'
 import registerP from '@/components/registerPersona.vue'
 import register from '@/components/register.vue'
-import cita from '@/components/citas.vue'
-import listarCitas from '@/components/listarCitas.vue'
-import recetaMedica from '../components/recetaMedica.vue'
 
+import citasLista from '../components/citas.vue'
+import expedientes from '../components/expedientesM.vue'
+import recetaMedica from '../components/recetaMedica.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,8 +38,11 @@ const router = createRouter({
       component: dashboard,
       children:[
         {path:'/registerP', name: 'personas',component:registerP},
-        {path:'/cita', name:'cita', component:cita},
-        {path:'/listarCitas', name:'listarCitas', component:listarCitas},
+
+        {path:'/citas', name:'citasLista', component:citasLista},
+
+        {path:'/expediente', name:'expediente', component:expedientes},
+
         {path:'/receta', name:'receta', component: recetaMedica }
         
       ]
