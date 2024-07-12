@@ -1,13 +1,15 @@
 from fastapi import FastAPI
-from routes.persons import person
 from routes.users import user
-
+from routes.persons import person
+from routes.rol import rol
+from routes.usersrol import userrol
 
 app=FastAPI(
-    title="Hospital General PrivilegeCare",
+    title="Hospital",
     description="API para el almacenamiento de informacipn de un hospital"
 )
-
-app.include_router(person)
 app.include_router(user)
-print("Bienvenido a mi aplicacion")
+app.include_router(person)
+app.include_router(rol)
+app.include_router(userrol)
+print ("Hola bienvenido a mi backend")
