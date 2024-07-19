@@ -57,7 +57,7 @@ def delete_user(id: int, db: Session = Depends(get_db)):
 
 @user.post("/login",tags=['autenticacion'])
 def login(usuario:schemas.users.UserLogin):
-    if usuario.usuario == 'rlunas' and usuario.password == '1234':
+    if usuario.Nombre_Usuario == 'Jose' and usuario.Contrasena == '210562':
         token:str=solicita_token(usuario.dict())
         return JSONResponse(status_code=200, content=token)
     else:
