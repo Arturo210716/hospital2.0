@@ -8,7 +8,7 @@ from typing import List
 
 import schemas.receta
 
-person = APIRouter()
+receta = APIRouter()
 
 models.receta.Base.metadata.create_all(bind=config.db.engine)
 
@@ -19,7 +19,7 @@ def get_db():
     finally:
         db.close()
         
-@person.get("/receta/", response_model=List[schemas.receta.Receta], tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
+@receta.get("/receta/", response_model=List[schemas.receta.Receta], tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
 def read_persons(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     db_receta= crud.receta.get_receta(db=db, skip=skip, limit=limit)
     return db_receta
