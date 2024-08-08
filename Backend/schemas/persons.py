@@ -4,7 +4,7 @@ from datetime import datetime
 
 from models.persons import MyGenero, MySangre
 
-class ExpedienteBase(BaseModel):
+class PersonBase(BaseModel):
     
     Titulo_Cortesia:str
     Nombre: str
@@ -24,11 +24,11 @@ class ExpedienteBase(BaseModel):
 
     
     
-class ExpedienteCreate(ExpedienteBase):
+class PersonCreate(PersonBase):
     pass
-class ExpedienteUpdate(ExpedienteBase):
+class PersonUpdate(PersonBase):
     pass
-class Expediente(ExpedienteBase):
+class Person(PersonBase):
     ID: int
 
     class Config:

@@ -10,7 +10,7 @@ class Expediente(Base):
     
     ID = Column(Integer, primary_key=True, index=True)
     Fecha_Consulta = Column(DateTime)
-    Hora_Consulta = Column(Time)
+    Hora_Consulta = Column(DateTime)
     Diagnostico = Column(String(255))
     Tratamiento_Relacionado = Column(String(255))
     Observaciones = Column(String(255))

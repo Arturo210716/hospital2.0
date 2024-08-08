@@ -5,8 +5,9 @@ from datetime import datetime
 
 class ExpedienteBase(BaseModel):
     
-    Hora_Consulta:datetime
-    Hora_Consulta: time
+    ID:int
+    Fecha_Consulta:datetime
+    Hora_Consulta: datetime
     Diagnostico: str
     Tratamiento_Relacionado: str
     Observaciones: str
