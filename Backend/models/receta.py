@@ -5,7 +5,7 @@ from config.db import Base
 
 
 class Receta(Base):
-    __tablename__ = "tbb_recetaMedica"
+    __tablename__ = "tbd_recetaMedica"
     
     ID = Column(Integer, primary_key=True, index=True)
     Nombre = Column(String(255))

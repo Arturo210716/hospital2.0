@@ -20,34 +20,34 @@ def get_db():
         db.close()
         
 @receta.get("/receta/", response_model=List[schemas.receta.Receta], tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
-def read_persons(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def read_receta(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     db_receta= crud.receta.get_receta(db=db, skip=skip, limit=limit)
     return db_receta
 
-@person.post("/receta/{ID}", response_model=schemas.receta.Receta, tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
-def read_person(ID: int, db: Session = Depends(get_db)):
-    db_receta= crud.persons.get_person(db=db, ID=ID)
+@receta.post("/receta/{ID}", response_model=schemas.receta.Receta, tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
+def read_receta(ID: int, db: Session = Depends(get_db)):
+    db_receta= crud.receta.get_receta(db=db, ID=ID)
     if db_receta is None:
-        raise HTTPException(status_code=404, detail="Person not found")
+        raise HTTPException(status_code=404, detail="Prescription not found")
     return db_receta
 
-@person.post("/receta/", response_model=schemas.receta.Receta, tags=["RecetaMedica"])
-def create_person(person: schemas.persons.PersonCreate, db: Session = Depends(get_db)):
-    db_receta = crud.persons.get_person_by_Nombre(db, Nombre=person.Nombre)
+@receta.post("/receta/", response_model=schemas.receta.Receta, tags=["RecetaMedica"])
+def create_receta(receta: schemas.receta.RecetaCreate, db: Session = Depends(get_db)):
+    db_receta = crud.receta.get_receta_by_Nombre(db, Nombre=receta.Nombre)
     if db_receta:
-        raise HTTPException(status_code=400, detail="Persona existente intenta nuevamente")
-    return crud.persons.create_person(db=db, person=person)
+        raise HTTPException(status_code=400, detail="Receta existente intenta nuevamente")
+    return crud.receta.create_receta(db=db, receta=receta)
 
-@person.put("/receta/{ID}", response_model=schemas.receta.Receta, tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
-def update_person(ID: int, person: schemas.receta.RecetaUpdate, db: Session = Depends(get_db)):
-    db_receta = crud.persons.update_person(db = db, ID = ID, person = person)
+@receta.put("/receta/{ID}", response_model=schemas.receta.Receta, tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
+def update_receta(ID: int, receta: schemas.receta.RecetaUpdate, db: Session = Depends(get_db)):
+    db_receta = crud.receta.update_receta(db = db, ID = ID, receta=receta)
     if db_receta is None:
-        raise HTTPException(status_code=404, detail="Persona no existente, no esta actuaizado")
+        raise HTTPException(status_code=404, detail="Receta no existente, no esta actuaizado")
     return db_receta
 
-@person.delete("/receta/{ID}", response_model=schemas.receta.Receta, tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
-def delete_person(ID: int, db: Session = Depends(get_db)):
-    db_receta = crud.persons.delete_person(db = db, ID = ID)
+@receta.delete("/receta/{ID}", response_model=schemas.receta.Receta, tags=["RecetaMedica"] ,dependencies=[Depends(Portador())])
+def delete_receta(ID: int, db: Session = Depends(get_db)):
+    db_receta = crud.receta.delete_receta(db = db, ID = ID)
     if db_receta is None:
-        raise HTTPException(status_code=404, detail="Persona no existe, no se pudo eliminar")
+        raise HTTPException(status_code=404, detail="Receta no existe, no se pudo eliminar")
     return db_receta
