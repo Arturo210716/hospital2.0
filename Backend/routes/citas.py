@@ -15,35 +15,35 @@ def get_db():
     finally:
         db.close()
         
-@person.get("/citas/", response_model=List[schemas.citas.Citas], tags=["Citas"] ,dependencies=[Depends(Portador())])
+@cita.get("/citas/", response_model=List[schemas.citas.Citas], tags=["Citas"] ,dependencies=[Depends(Portador())])
 def read_citas(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     db_cita= crud.citas.get_citas(db=db, skip=skip, limit=limit)
     return db_cita
 
-@person.post("/cita/{ID}", response_model=schemas.citas.Citas, tags=["Citas"] ,dependencies=[Depends(Portador())])
+@cita.post("/cita/{ID}", response_model=schemas.citas.Citas, tags=["Citas"] ,dependencies=[Depends(Portador())])
 def read_cita(ID: int, db: Session = Depends(get_db)):
     db_cita= crud.citas.get_cita(db=db, ID=ID)
     if db_cita is None:
-        raise HTTPException(status_code=404, detail="Person not found")
+        raise HTTPException(status_code=404, detail="Cita not found")
     return db_cita
 
-@person.post("/persons/", response_model=schemas.citas.Citas, tags=["Citas"])
-def create_person(person: schemas.persons.CitasCreate, db: Session = Depends(get_db)):
-    db_person = crud.citas.get_cita_by_Nombre(db, Nombre=person.Nombre)
-    if db_person:
-        raise HTTPException(status_code=400, detail="Persona existente intenta nuevamente")
-    return crud.persons.create_person(db=db, person=person)
+@cita.post("/citas/", response_model=schemas.citas.Citas, tags=["Citas"])
+def create_cita(cita: schemas.citas.CitasCreate, db: Session = Depends(get_db)):
+    db_cita = crud.citas.get_cita(db, ID=cita.ID)
+    if db_cita:
+        raise HTTPException(status_code=400, detail="Cita existente intenta nuevamente")
+    return crud.citas.create_cita(db=db, cita=cita)
 
-@person.put("/person/{ID}", response_model=schemas.persons.Person, tags=["Citas"] ,dependencies=[Depends(Portador())])
-def update_person(ID: int, person: schemas.persons.PersonUpdate, db: Session = Depends(get_db)):
-    db_person = crud.persons.update_person(db = db, ID = ID, person = person)
-    if db_person is None:
-        raise HTTPException(status_code=404, detail="Persona no existente, no esta actuaizado")
-    return db_person
+@cita.put("/cita/{ID}",  response_model=schemas.citas.Citas, tags=["Citas"] ,dependencies=[Depends(Portador())])
+def update_cita(ID: int, cita: schemas.citas.CitasUpdate, db: Session = Depends(get_db)):
+    db_cita = crud.citas.update_cita(db = db, ID = ID, cita = cita)
+    if db_cita is None:
+        raise HTTPException(status_code=404, detail="Cita no existente, no esta actualizado")
+    return db_cita
 
-@person.delete("/person/{ID}", response_model=schemas.persons.Person, tags=["Citas"] ,dependencies=[Depends(Portador())])
-def delete_person(ID: int, db: Session = Depends(get_db)):
-    db_person = crud.persons.delete_person(db = db, ID = ID)
-    if db_person is None:
-        raise HTTPException(status_code=404, detail="Persona no existe, no se pudo eliminar")
-    return db_person
+@cita.delete("/cita/{ID}", response_model=schemas.citas.Citas, tags=["Citas"] ,dependencies=[Depends(Portador())])
+def delete_cita(ID: int, db: Session = Depends(get_db)):
+    db_cita = crud.citas.delete_cita(db = db, ID = ID)
+    if db_cita is None:
+        raise HTTPException(status_code=404, detail="Cita no existente, no se pudo eliminar")
+    return db_cita

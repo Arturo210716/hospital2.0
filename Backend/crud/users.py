@@ -14,11 +14,6 @@ def get_user_by_credentials(db: Session, usuario: str,Correo_Electronico:str,Tel
                                               (models.users.User.Correo_Electronico==Correo_Electronico)|
                                               (models.users.User.Numero_Telefonico_Movil==Telefono),
                                               models.users.User.Contrasena == password).first()
-    
-
-
-
-
 
 def get_users(db: Session, skip: int = 0, limit: int = 10):
     return db.query(models.users.User).offset(skip).limit(limit).all()

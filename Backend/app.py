@@ -5,7 +5,7 @@ from routes.users import user
 from routes.persons import person
 from routes.roles import roles
 from routes.usersrols import userrol
-from routes.citas import citas
+from routes.citas import cita
 
 
 app= FastAPI()
@@ -15,7 +15,7 @@ app.include_router(user)
 app.include_router(person)
 app.include_router(roles)
 app.include_router(userrol)
-app.include_router(citas)
+app.include_router(cita)
 
 
 

@@ -5,10 +5,11 @@ from time import time
 
 
 class CitasBase(BaseModel):
-    Hora_Cita = time
-    Telefono = str
-    Correo_Electronico = str
-    Motivo_Cita = str
+    ID: int
+    Hora_Cita:datetime
+    Telefono:str
+    Correo_Electronico:str
+    Motivo_Cita:str
     Estatus:bool
     Fecha_Registro:datetime
     Fecha_Actualizacion:datetime
