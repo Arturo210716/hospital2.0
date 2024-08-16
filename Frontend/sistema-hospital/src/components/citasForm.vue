@@ -8,7 +8,7 @@
                     <div class="mb-6">
                         <div class="mt-4 py-2">
                             <div>
-                                <label for="id_busqueda" class="block text-gray-700 dark:text-white mb-1">Buscar ID</label>
+                                <label for="id_busqueda" class="block text-gray-700 dark:text-white mb-1">ID del Paciente</label>
                                 <input type="text" id="id_busqueda" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" placeholder="Introduce el ID a buscar" required>
                             </div>
                         </div>
