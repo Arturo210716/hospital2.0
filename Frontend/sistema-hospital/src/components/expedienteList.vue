@@ -1,52 +1,212 @@
 <template>
-    <div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10">
-    <table class="w-full table-fixed">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Nombre</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Fecha</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Peso</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Talla</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Edad</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">P.A</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Diagnostico</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Prescripción Médica</th>
-            </tr>
-        </thead>
-        <tbody class="bg-white">
+    <div>
+      <div v-if="message" style="margin-top: 10px;">
+        {{ message }}
+      </div>
+  
+      <div class="container text-center">
+        <!-- Barra de búsqueda -->
+        <div style="margin-bottom: 10px;">
+          <input 
+            type="text" 
+            v-model="textoBusqueda" 
+            @input="buscarExpedientes"
+            placeholder="Buscar por Id del paciente..."
+            style="width: 80%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+        </div>
+      </div>
+      <br>
+  
+      <div class="tabla1">
+        <table>
+          <thead>
             <tr>
-        <td class="py-4 px-6 border-b border-gray-200">John Doe</td>
-        <td class="py-4 px-6 border-b border-gray-200 truncate">2024-06-11</td>
-        <td class="py-4 px-6 border-b border-gray-200">75 kg</td>
-        <td class="py-4 px-6 border-b border-gray-200">180 cm</td>
-        <td class="py-4 px-6 border-b border-gray-200">35 años</td>
-        <td class="py-4 px-6 border-b border-gray-200">120/80 mmHg</td>
-        <td class="py-4 px-6 border-b border-gray-200">Hipertensión</td>
-        <td class="py-4 px-6 border-b border-gray-200">Recetar medicamento X</td>
-    </tr>
-    <tr>
-        <td class="py-4 px-6 border-b border-gray-200">Jane Doe</td>
-        <td class="py-4 px-6 border-b border-gray-200 truncate">2024-06-11</td>
-        <td class="py-4 px-6 border-b border-gray-200">68 kg</td>
-        <td class="py-4 px-6 border-b border-gray-200">165 cm</td>
-        <td class="py-4 px-6 border-b border-gray-200">40 años</td>
-        <td class="py-4 px-6 border-b border-gray-200">130/90 mmHg</td>
-        <td class="py-4 px-6 border-b border-gray-200">Diabetes</td>
-        <td class="py-4 px-6 border-b border-gray-200">Recetar medicamento Y</td>
-    </tr>
-    <tr>
-        <td class="py-4 px-6 border-b border-gray-200">John Smith</td>
-        <td class="py-4 px-6 border-b border-gray-200 truncate">2024-06-12</td>
-        <td class="py-4 px-6 border-b border-gray-200">80 kg</td>
-        <td class="py-4 px-6 border-b border-gray-200">175 cm</td>
-        <td class="py-4 px-6 border-b border-gray-200">45 años</td>
-        <td class="py-4 px-6 border-b border-gray-200">140/95 mmHg</td>
-        <td class="py-4 px-6 border-b border-gray-200">Obesidad</td>
-        <td class="py-4 px-6 border-b border-gray-200">Recetar medicamento Z</td>
-    </tr>
-    
-            <!-- Add more rows here -->
-        </tbody>
-    </table>
-</div>
-</template>
+              <th>Id del Expediente</th>
+              <th>Id del Paciente</th>
+              <th>Hora de la Consulta</th>
+              <th>Diagnostico</th>
+              <th>Tratamiento Relacionado</th>
+              <th>Obervaciones</th>
+              <th>Estatus</th>
+              <th>Fecha de registro</th>
+              <th>Fecha de actualización</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(Expediente, index) in ExpedientesFiltrados" :key="index">
+              <td>{{ Expediente.ID }}</td>
+              <td>{{ Expediente.Persona_ID }}</td>
+              <td>{{ Expediente.Hora_Consulta }}</td>
+              <td>{{ Expediente.Diagnostico }}</td>
+              <td>{{ Expediente.Tratamiento_Relacionado }}</td>
+              <td>{{ Expediente.Observaciones }}</td>
+              <td>{{ Expediente.Estatus }}</td>
+              <td>{{ Expediente.Fecha_Registro }}</td>
+              <td>{{ Expediente.Fecha_Actualizacion }}</td>
+              <td>
+              <button class="mt-2 flex justify-between botonEliminar" @click="eliminarExpediente(Expediente.ID)">
+                <i ></i> Eliminar
+              </button>
+              &nbsp;&nbsp;&nbsp;
+
+              <router-link :to="{ name: 'editarE', params: { id: Expediente.ID } }">
+                <button class=" mt-2 flex justify-between botonEditar">
+                  <i></i> Editar
+                </button>
+              </router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  </template>
+
+
+  <script>
+  /* eslint-disable */
+  export default {
+    data() {
+      return {
+        Expedientes: [], 
+        message: '',
+        paginaActual: 1,
+        itemsPorPagina: 10,
+        textoBusqueda: '', 
+      };
+    },
+    computed: {
+        ExpedientesFiltrados() {
+        if (this.textoBusqueda.trim() === '') {
+          return this.Expedientes;
+        }
+        const busqueda = this.textoBusqueda.toLowerCase();
+        return this.Expedientes.filter(Expediente =>
+          Expediente.ID.toLowerCase().includes(busqueda) ||
+          Expediente.Persona_ID.toLowerCase().includes(busqueda) ||
+          Expediente.Diagnostico.toLowerCase().includes(busqueda) ||
+          Expediente.Hora_Consulta.toLowerCase().includes(busqueda)
+        );
+      }
+    },
+    mounted() {
+      this.obtenerExpedientes();
+    },
+    methods: {
+      obtenerExpedientes() {
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
+        fetch(`http://127.0.0.1:8000/expedienteAll/?page=${this.paginaActual - 1}&limit=${this.itemsPorPagina}`,{
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Hubo un problema al obtener la lista de los Expedientes.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data);  
+          this.Expedientes = data;
+        })
+        .catch(error => {
+          this.message = "Error: " + error.message;
+        });
+      },
+      eliminarExpediente(ID) {
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
+        fetch(`http://127.0.0.1:8000/expedienteDelete/${ID}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Hubo un problema al eliminar el expediente.');
+          }
+          this.message = "¡Expediente eliminada exitosamente!";
+          this.obtenerExpedientes();
+          setTimeout(() => {
+            this.message = '';
+          }, 3000);
+        })
+        .catch(error => {
+          this.message = "Error: " + error.message;
+        });
+      },
+      buscarExpedientes() {}
+    }
+  }
+  </script>
+  
+  <style scoped>
+  .tabla1 {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-collapse: collapse;
+  }
+  
+  .router-link-custom {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  th, td {
+    border: 1px solid #1fbcfa;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #246ab9;
+  }
+  
+  .botonEliminar {
+    background-color: #e9351d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .botonEliminar:hover {
+    background-color: #fc5858;
+  }
+  
+  .botonEditar {
+    background-color: #faab00;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .botonEditar:hover {
+    background-color: #ffb546;
+  }
+
+
+  .fas.fa-trash-alt {
+    margin-right: 5px;
+  }
+  </style>
+  
