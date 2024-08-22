@@ -8,6 +8,8 @@ import register from '@/components/register.vue'
 import citasLista from '../components/citas.vue'
 import expedientes from '../components/expedientesM.vue'
 import recetaMedica from '../components/recetaMedica.vue'
+import editar from '../components/citasEdit.vue'
+import CitasEdit from '../components/citasEdit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,8 +45,13 @@ const router = createRouter({
 
         {path:'/expediente', name:'expediente', component:expedientes},
 
-        {path:'/receta', name:'receta', component: recetaMedica }
-        
+        {path:'/receta', name:'receta', component: recetaMedica },
+        {
+          path: '/editar/:id',  // Define la ruta con el parámetro `id`
+          name: 'editar',
+          component: CitasEdit,
+          props: true  // Permite pasar el parámetro `id` como prop al componente
+        }
       ]
     }
     
