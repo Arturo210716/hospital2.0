@@ -11,8 +11,6 @@ class CitasBase(BaseModel):
     Correo_Electronico:str
     Motivo_Cita:str
     Estatus:MyEstatusCita
-    Fecha_Registro:datetime
-    Fecha_Actualizacion:datetime
     
     
 class CitasCreate(CitasBase):

@@ -11,8 +11,7 @@ class ExpedienteBase(BaseModel):
     Tratamiento_Relacionado: str
     Observaciones: str
     Estatus:MyEstatusExpediente
-    Fecha_Registro:datetime
-    Fecha_Actualizacion:datetime
+
 
 
     

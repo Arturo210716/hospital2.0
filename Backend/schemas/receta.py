@@ -12,8 +12,7 @@ class RecetaBase(BaseModel):
     Presion_arterial: str
     Diagnostico: str
     Prescripcion_Medica: str
-    Fecha_Registro:datetime
-    Fecha_Actualizacion:datetime
+
 
 
     

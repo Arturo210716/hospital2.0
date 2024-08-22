@@ -51,15 +51,6 @@
               </div>
             </div>
 
-              <div class="mt-4">
-                <label for="Fecha_Registro" class="block text-gray-700 text-black mb-1">Fecha de Registro</label>
-                <input type="datetime-local" id="Fecha_Registro" v-model="Fecha_Registro" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-              </div>
-
-              <div class="mt-4">
-                <label for="Fecha_Actualizacion" class="block text-gray-700 text-black mb-1">Fecha de Actualización</label>
-                <input type="datetime-local" id="Fecha_Actualizacion" v-model="Fecha_Actualizacion" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-              </div>
   
             <div class="mt-8 flex justify-start">
               <button class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900">Generar Receta</button>
@@ -83,14 +74,12 @@ export default {
       Presion_arterial: '',
       Diagnostico: '',
       Prescripcion_Medica: '',
-      Fecha_Registro: '',
-      Fecha_Actualizacion:  '',
       message: ''
     };
   },
   methods: {
     submitForm() {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
 
       let data = {
         Nombre: this.Nombre,
@@ -100,9 +89,7 @@ export default {
         Edad: this.Edad,
         Presion_arterial: this.Presion_arterial,
         Diagnostico: this.Diagnostico,
-        Prescripcion_Medica: this.Prescripcion_Medica,
-        Fecha_Registro: this.Fecha_Registro,
-        Fecha_Actualizacion: this.Fecha_Actualizacion
+        Prescripcion_Medica: this.Prescripcion_Medica
       };
 
       fetch('http://127.0.0.1:8000/recetaCreate/', {
@@ -121,6 +108,7 @@ export default {
       })
       .then(data => {
         this.message = "¡Receta registrada exitosamente!";
+        window.location.reload();
         // Limpiar los campos del formulario después del registro exitoso
         this.resetForm();
       })
@@ -137,9 +125,7 @@ export default {
       this.Edad= '',
       this.Presion_arterial= '',
       this.Diagnostico= '',
-      this.Prescripcion_Medica= '',
-      this.Fecha_Registro= '',
-      this.Fecha_Actualizacion= ''
+      this.Prescripcion_Medica= ''
     }
   }
 }

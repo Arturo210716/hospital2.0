@@ -28,8 +28,6 @@
               <th>Correo electrónico del contacto</th>
               <th>Motivo de la Cita</th>
               <th>Estatus</th>
-              <th>Fecha de registro</th>
-              <th>Fecha de actualización</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -42,8 +40,6 @@
               <td>{{ Cita.Correo_Electronico }}</td>
               <td>{{ Cita.Motivo_Cita }}</td>
               <td>{{ Cita.Estatus }}</td>
-              <td>{{ Cita.Fecha_Registro }}</td>
-              <td>{{ Cita.Fecha_Actualizacion }}</td>
               <td>
               <button class="mt-2 flex justify-between botonEliminar" @click="eliminarCita(Cita.ID)">
                 <i ></i> Eliminar
@@ -95,8 +91,8 @@
     },
     methods: {
       obtenerCitas() {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
-        fetch(`http://127.0.0.1:8000/citaAll/?page=${this.paginaActual - 1}&limit=${this.itemsPorPagina}`,{
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
+        fetch(`http://127.0.0.1:8000/citaAll/?skip=${this.paginaActual - 1}&limit=${this.itemsPorPagina}`,{
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -118,7 +114,7 @@
         });
       },
       eliminarCita(ID) {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
         fetch(`http://127.0.0.1:8000/citaDelete/${ID}`, {
           method: 'DELETE',
           headers: {

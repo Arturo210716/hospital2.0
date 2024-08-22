@@ -30,8 +30,6 @@
               <th>Presion arterial</th>
               <th>Diagnostico</th>
               <th>Prescripcion_Medica</th>
-              <th>Fecha de registro</th>
-              <th>Fecha de actualización</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -46,8 +44,6 @@
               <td>{{ Receta.Presion_arterial }}</td>
               <td>{{ Receta.Diagnostico }}</td>
               <td>{{ Receta.Prescripcion_Medica }}</td>
-              <td>{{ Receta.Fecha_Registro }}</td>
-              <td>{{ Receta.Fecha_Actualizacion }}</td>
               <td>
               <button class="mt-2 flex justify-between botonEliminar" @click="eliminarReceta(Receta.ID)">
                 <i ></i> Eliminar
@@ -100,8 +96,8 @@
     },
     methods: {
         obtenerRecetas() {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
-        fetch(`http://127.0.0.1:8000/recetaAll/?page=${this.paginaActual - 1}&limit=${this.itemsPorPagina}`,{
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
+        fetch(`http://127.0.0.1:8000/recetaAll/?skip=${this.paginaActual - 1}&limit=${this.itemsPorPagina}`,{
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -123,7 +119,7 @@
         });
       },
       eliminarReceta(ID) {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
         fetch(`http://127.0.0.1:8000/recetaDelete/${ID}`, {
           method: 'DELETE',
           headers: {

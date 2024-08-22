@@ -28,8 +28,6 @@
               <th>Tratamiento Relacionado</th>
               <th>Obervaciones</th>
               <th>Estatus</th>
-              <th>Fecha de registro</th>
-              <th>Fecha de actualización</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -42,8 +40,6 @@
               <td>{{ Expediente.Tratamiento_Relacionado }}</td>
               <td>{{ Expediente.Observaciones }}</td>
               <td>{{ Expediente.Estatus }}</td>
-              <td>{{ Expediente.Fecha_Registro }}</td>
-              <td>{{ Expediente.Fecha_Actualizacion }}</td>
               <td>
               <button class="mt-2 flex justify-between botonEliminar" @click="eliminarExpediente(Expediente.ID)">
                 <i ></i> Eliminar
@@ -96,8 +92,8 @@
     },
     methods: {
       obtenerExpedientes() {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
-        fetch(`http://127.0.0.1:8000/expedienteAll/?page=${this.paginaActual - 1}&limit=${this.itemsPorPagina}`,{
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
+        fetch(`http://127.0.0.1:8000/expedienteAll/?skip=${this.paginaActual - 1}&limit=${this.itemsPorPagina}`,{
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -119,7 +115,7 @@
         });
       },
       eliminarExpediente(ID) {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
         fetch(`http://127.0.0.1:8000/expedienteDelete/${ID}`, {
           method: 'DELETE',
           headers: {

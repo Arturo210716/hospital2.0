@@ -41,16 +41,6 @@
                   <label for="Observaciones" class="block text-black mb-1">Observaciones</label>
                   <textarea id="Observaciones" v-model="Observaciones" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Añade observaciones adicionales si es necesario"></textarea>
                 </div>
-
-                <div class="mt-4">
-                <label for="Fecha_Registro" class="block text-gray-700 text-black mb-1">Fecha de Registro</label>
-                <input type="datetime-local" id="Fecha_Registro" v-model="Fecha_Registro" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
-
-                <div class="mt-4">
-                  <label for="Fecha_Actualizacion" class="block text-gray-700 text-black mb-1">Fecha de Actualización</label>
-                  <input type="datetime-local" id="Fecha_Actualizacion" v-model="Fecha_Actualizacion" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
   
                 <div class="mt-8 flex justify-start">
                   <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-900">Registrar Expediente Médico</button>
@@ -74,14 +64,12 @@ export default {
       Tratamiento_Relacionado: '',
       Observaciones: '',
       Estatus: 'Activo',
-      Fecha_Registro: '',
-      Fecha_Actualizacion: '',
       message: ''
     };
   },
   methods: {
     submitForm() {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6IkFydHVybyIsIkNvcnJlb19FbGVjdHJvbmljbyI6InN0cmluZyIsIkNvbnRyYXNlbmEiOiIxMjMiLCJOdW1lcm9fVGVsZWZvbmljb19Nb3ZpbCI6InN0cmluZyJ9.SsK8F6Kdj41MK2iip-McFVoVrm2__IQOOcRu4DNjRdE'; 
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21icmVfVXN1YXJpbyI6InlhaXIiLCJDb3JyZW9fRWxlY3Ryb25pY28iOiJzdHJpbmciLCJDb250cmFzZW5hIjoiMTIzNCIsIk51bWVyb19UZWxlZm9uaWNvX01vdmlsIjoic3RyaW5nIn0.aEXy_fgDdUHif1wzhfpxddKVg4fWAyGR3fd1p-SWDOc'; 
 
       let data = {
         Persona_ID: this.Persona_ID,
@@ -89,9 +77,7 @@ export default {
         Diagnostico: this.Diagnostico,
         Tratamiento_Relacionado: this.Tratamiento_Relacionado,
         Observaciones: this.Observaciones,
-        Estatus: this.Estatus,
-        Fecha_Registro: this.Fecha_Registro,
-        Fecha_Actualizacion: this.Fecha_Actualizacion
+        Estatus: this.Estatus
       };
 
       fetch('http://127.0.0.1:8000/expedienteCreate/', {
@@ -109,8 +95,9 @@ export default {
         return response.json();
       })
       .then(data => {
-        this.message = "¡Expediente registrada exitosamente!";
+        this.message = "¡Expediente registrado exitosamente!";
         // Limpiar los campos del formulario después del registro exitoso
+        window.location.reload();
         this.resetForm();
       })
       .catch(error => {
@@ -125,8 +112,7 @@ export default {
       this.Tratamiento_Relacionado = '';
       this.Observaciones = '';
       this.Estatus = 'Activo';
-      this.Fecha_Registro = '';
-      this.Fecha_Actualizacion = '';
+
     }
   }
 }
