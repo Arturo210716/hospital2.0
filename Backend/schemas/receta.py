@@ -24,6 +24,5 @@ class RecetaUpdate(RecetaBase):
     pass
 class Receta(RecetaBase):
     ID: int
-
     class Config:
         orm_mode = True

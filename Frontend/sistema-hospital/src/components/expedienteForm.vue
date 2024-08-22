@@ -45,12 +45,12 @@
                 <div class="mt-4">
                 <label for="Fecha_Registro" class="block text-gray-700 text-black mb-1">Fecha de Registro</label>
                 <input type="datetime-local" id="Fecha_Registro" v-model="Fecha_Registro" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-              </div>
+                </div>
 
-              <div class="mt-4">
-                <label for="Fecha_Actualizacion" class="block text-gray-700 text-black mb-1">Fecha de Actualización</label>
-                <input type="datetime-local" id="Fecha_Actualizacion" v-model="Fecha_Actualizacion" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-              </div>
+                <div class="mt-4">
+                  <label for="Fecha_Actualizacion" class="block text-gray-700 text-black mb-1">Fecha de Actualización</label>
+                  <input type="datetime-local" id="Fecha_Actualizacion" v-model="Fecha_Actualizacion" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
+                </div>
   
                 <div class="mt-8 flex justify-start">
                   <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-900">Registrar Expediente Médico</button>
