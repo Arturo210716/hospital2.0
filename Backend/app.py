@@ -11,13 +11,9 @@ from routes.receta import receta
 
 app= FastAPI()
 # Configuración de CORS
-orig_cors_origins = [
-    "http://localhost:8080",  # Cambia esto por el origen de tu frontend
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=orig_cors_origins,
+    allow_origins=["http://localhost:5173"],  # O usa ["*"] para permitir todas las origines
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

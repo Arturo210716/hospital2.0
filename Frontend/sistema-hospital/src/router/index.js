@@ -9,6 +9,9 @@ import citasLista from '../components/citas.vue'
 import expedientes from '../components/expedientesM.vue'
 import recetaMedica from '../components/recetaMedica.vue'
 
+import graficas from '@/components/graficas.vue'
+import Graficas from '@/components/graficas.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,6 +40,8 @@ const router = createRouter({
       name: 'dashboard',
       component: dashboard,
       children:[
+        {path:'/graficas', name: 'Graficas', component: Graficas},
+
         {path:'/registerP', name: 'personas',component:registerP},
 
         {path:'/citas', name:'citasLista', component:citasLista},

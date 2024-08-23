@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from portadortoken import Portador
 import crud.persons,config.db,schemas.persons,models.persons
 from typing import List
+from sqlalchemy import func
+
 
 person = APIRouter()
 
@@ -47,3 +49,29 @@ def delete_person(ID: int, db: Session = Depends(get_db)):
     if db_person is None:
         raise HTTPException(status_code=404, detail="Persona no existe, no se pudo eliminar")
     return db_person
+
+""" @person.get("/persons/datos", tags=["Personas"])
+def get_personas_data(db: Session = Depends(get_db)):
+    generos = db.query(
+        models.persons.Genero,
+        func.count(models.persons.Genero).label('cantidad')
+    ).group_by(models.persons.Genero).all()
+
+    tipo_sangre = db.query(
+        models.persons.MySangre,
+        func.count(models.persons.MySangre).label('cantidad')
+    ).group_by(models.persons.MySangre).all()
+
+    genero_data = {'Masculino': 0, 'Femenino': 0, 'Otro': 0}
+    tipo_sangre_data = {'ap': 0, 'an': 0, 'bp': 0, 'bn': 0, 'abp': 0, 'abn': 0, 'op': 0, 'on': 0}
+
+    for genero in generos:
+        genero_data[genero.Genero.lower()] = genero.cantidad
+
+    for sangre in tipo_sangre:
+        tipo_sangre_data[sangre.Tipo_Sangre.lower()] = sangre.cantidad
+
+    return {
+        "genero": genero_data,
+        "tipo_sangre": tipo_sangre_data
+    } """
