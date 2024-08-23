@@ -9,6 +9,8 @@ from routes.receta import receta
 from routes.citas import cita
 from routes.expediente import expediente
 from fastapi.middleware.cors import CORSMiddleware
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -30,6 +32,11 @@ app.include_router(userrol)
 app.include_router(receta)
 app.include_router(cita)
 app.include_router(expediente)
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 
 
