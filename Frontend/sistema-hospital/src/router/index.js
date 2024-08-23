@@ -11,6 +11,7 @@ import recetaMedica from '../components/recetaMedica.vue'
 import expedienteEdit from '../components/expedientesEdit.vue'
 import CitasEdit from '../components/citasEdit.vue'
 import recetaEdit from '../components/recetasEdit.vue'
+import Graficas from '@/components/graficas.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,8 @@ const router = createRouter({
       name: 'dashboard',
       component: dashboard,
       children:[
+        {path:'/graficas', name: 'Graficas', component: Graficas},
+
         {path:'/registerP', name: 'personas',component:registerP},
 
         {path:'/citas', name:'citasLista', component:citasLista},
