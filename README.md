@@ -9,6 +9,9 @@ https://master.d24kzxoqei0zxg.amplifyapp.com/
 
 
 npm install vite-plugin-pwa --save-dev
+
 npm run build
+
 npm install -g serve
+
 serve dist
