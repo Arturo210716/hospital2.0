@@ -15,3 +15,5 @@ npm run build
 npm install -g serve
 
 serve dist
+
+npm install vite-plugin-static-copy --save-dev
