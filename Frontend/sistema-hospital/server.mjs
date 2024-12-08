@@ -18,5 +18,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Servidor corriendo en http://10.10.60.16:${port}`);
+  console.log(`Servidor corriendo en http://192.168.0.107:${port}`);
 });

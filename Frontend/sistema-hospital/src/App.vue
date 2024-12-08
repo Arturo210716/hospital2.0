@@ -46,5 +46,7 @@ defineExpose({
 </script>
 
 <template>
-  <RouterView />
+ <div class="p-4 sm:ml-64" @click="closeSidebarIfOutsideClick">
+  <router-view />
+</div>
 </template>
