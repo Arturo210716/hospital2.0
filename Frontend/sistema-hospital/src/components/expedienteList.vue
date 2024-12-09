@@ -1,65 +1,79 @@
 <template>
-    <div>
-      <div v-if="message" style="margin-top: 10px;">
-        {{ message }}
+  <div class="min-h-screen bg-gray-100 py-8">
+    <div class="container mx-auto">
+      <!-- Mensaje -->
+      <div v-if="message" class="text-center text-lg text-red-500 p-4 rounded mb-4">
+      {{ message }}
+    </div>
+
+      <!-- Barra de búsqueda -->
+      <div class="flex justify-center mb-6">
+        <input
+          type="text"
+          v-model="textoBusqueda"
+          @input="buscarExpedientes"
+          placeholder="Buscar por Id del paciente..."
+          class="w-4/5 md:w-2/3 lg:w-1/2 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
+        />
       </div>
-  
-      <div class="container text-center">
-        <!-- Barra de búsqueda -->
-        <div style="margin-bottom: 10px;">
-          <input 
-            type="text" 
-            v-model="textoBusqueda" 
-            @input="buscarExpedientes"
-            placeholder="Buscar por Id del paciente..."
-            style="width: 80%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-        </div>
-      </div>
-      <br>
-  
-      <div class="tabla1">
-        <table>
-          <thead>
+
+      <!-- Tabla -->
+      <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+        <table class="table-auto w-full text-sm text-left">
+          <thead class="bg-teal-500 text-white">
             <tr>
-              <th>Id del Expediente</th>
-              <th>Id del Paciente</th>
-              <th>Hora de la Consulta</th>
-              <th>Diagnostico</th>
-              <th>Tratamiento Relacionado</th>
-              <th>Obervaciones</th>
-              <th>Estatus</th>
-              <th>Acciones</th>
+              <th class="px-4 py-2">Id del Expediente</th>
+              <th class="px-4 py-2">Id del Paciente</th>
+              <th class="px-4 py-2">Hora de la Consulta</th>
+              <th class="px-4 py-2">Diagnóstico</th>
+              <th class="px-4 py-2">Tratamiento Relacionado</th>
+              <th class="px-4 py-2">Observaciones</th>
+              <th class="px-4 py-2">Estatus</th>
+              <th class="px-4 py-2">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(Expediente, index) in ExpedientesFiltrados" :key="index">
-              <td>{{ Expediente.ID }}</td>
-              <td>{{ Expediente.Persona_ID }}</td>
-              <td>{{ Expediente.Hora_Consulta }}</td>
-              <td>{{ Expediente.Diagnostico }}</td>
-              <td>{{ Expediente.Tratamiento_Relacionado }}</td>
-              <td>{{ Expediente.Observaciones }}</td>
-              <td>{{ Expediente.Estatus }}</td>
-              <td>
-              <button class="mt-2 flex justify-between botonEliminar" @click="eliminarExpediente(Expediente.ID)">
-                <i ></i> Eliminar
-              </button>
-              &nbsp;&nbsp;&nbsp;
-
-              <router-link :to="{ name: 'editarE', params: { id: Expediente.ID } }">
-                <button class=" mt-2 flex justify-between botonEditar">
-                  <i></i> Editar
+            <tr
+              v-for="(Expediente, index) in ExpedientesFiltrados"
+              :key="index"
+              class="border-b hover:bg-gray-100"
+            >
+              <td class="px-4 py-2">{{ Expediente.ID }}</td>
+              <td class="px-4 py-2">{{ Expediente.Persona_ID }}</td>
+              <td class="px-4 py-2">{{ Expediente.Hora_Consulta }}</td>
+              <td class="px-4 py-2">{{ Expediente.Diagnostico }}</td>
+              <td class="px-4 py-2">{{ Expediente.Tratamiento_Relacionado }}</td>
+              <td class="px-4 py-2">{{ Expediente.Observaciones }}</td>
+              <td class="px-4 py-2">{{ Expediente.Estatus }}</td>
+              <td class="px-4 py-2 flex gap-2">
+                <!-- Botón Eliminar -->
+                <button
+                  class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-300"
+                  @click="eliminarExpediente(Expediente.ID)"
+                >
+                  Eliminar
                 </button>
-              </router-link>
+
+                <!-- Botón Editar -->
+                <router-link
+                  :to="{ name: 'editarE', params: { id: Expediente.ID } }"
+                  class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-300"
+                >
+                  Editar
+                </router-link>
+              </td>
+            </tr>
+            <tr v-if="ExpedientesFiltrados.length === 0">
+              <td colspan="8" class="px-4 py-6 text-center text-gray-500">
+                No se encontraron expedientes.
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-  
     </div>
-  </template>
-
+  </div>
+</template>
 
   <script>
   /* eslint-disable */

@@ -1,65 +1,135 @@
 <template>
-    <div class="flex flex-col md:flex-row justify-center items-center">
-      <div class="w-max md:w-2/4 p-8">
-        <div class="border rounded-lg shadow-md p-6">
-          <form @submit.prevent="submitForm">
-            <h1 class="text-2xl font-bold text-black mb-4">Receta Médica</h1>
-  
-            <!-- Información del Paciente -->
-            <div class="mb-6">
-              <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label for="Nombre" class="block text-black mb-1">Nombre</label>
-                  <input type="text" id="Nombre" v-model="Nombre" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Introduce tu nombre" required>
-                </div>
-                <div>
-                  <label for="Fecha_Nacimiento" class="block text-black mb-1">Fecha</label>
-                  <input type="date" id="Fecha_Nacimiento" v-model="Fecha_Nacimiento" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
-              </div>
-  
-              <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label for="Peso" class="block text-black mb-1">Peso (kg)</label>
-                  <input type="text" id="Peso" v-model="Peso" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
-                <div>
-                  <label for="Talla" class="block text-black mb-1">Talla (m)</label>
-                  <input type="text" id="Talla" v-model="Talla" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
-              </div>
-  
-              <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label for="Edad" class="block text-black mb-1">Edad</label>
-                  <input type="text" id="Edad" v-model="Edad" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
-                <div>
-                  <label for="Presion_arterial" class="block text-black mb-1">Presión Arterial</label>
-                  <input type="text" id="Presion_arterial" v-model="Presion_arterial" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
-              </div>
-  
-              <div class="mb-4">
-                <label for="Diagnostico" class="block text-black mb-1">Diagnóstico</label>
-                <input type="text" id="Diagnostico" v-model="Diagnostico" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-              </div>
-  
-              <div class="mb-4">
-                <label for="Prescripcion_Medica" class="block text-black mb-1">Prescripción Médica</label>
-                <textarea id="Prescripcion_Medica" v-model="Prescripcion_Medica" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border"></textarea>
-              </div>
-            </div>
+  <div class="min-h-screen bg-gray-100 py-8">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-center items-center">
+        <div class="w-full md:w-2/3 lg:w-1/2 p-6">
+          <div class="bg-white border rounded-lg shadow-md p-6">
+            <form @submit.prevent="submitForm">
+              <h1 class="text-2xl font-bold text-black mb-6">Receta Médica</h1>
 
-  
-            <div class="mt-8 flex justify-start">
-              <button class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900">Generar Receta</button>
-            </div>
-          </form>
+              <!-- Información del Paciente -->
+              <div class="mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="Nombre" class="block text-black mb-1">Nombre</label>
+                    <input 
+                      type="text" 
+                      id="Nombre" 
+                      v-model="Nombre" 
+                      class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" 
+                      placeholder="Introduce tu nombre" 
+                      required
+                      aria-required="true"
+                      aria-describedby="nombre-help"
+                    >
+                    <small id="nombre-help" class="text-gray-500">Ingresa el nombre completo del paciente.</small>
+                  </div>
+                  <div>
+                    <label for="Fecha_Nacimiento" class="block text-black mb-1">Fecha de Nacimiento</label>
+                    <input 
+                      type="date" 
+                      id="Fecha_Nacimiento" 
+                      v-model="Fecha_Nacimiento" 
+                      class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" 
+                      required
+                      aria-required="true"
+                      aria-describedby="fecha-help"
+                    >
+                    <small id="fecha-help" class="text-gray-500">Selecciona la fecha de nacimiento del paciente.</small>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="Peso" class="block text-black mb-1">Peso (kg)</label>
+                    <input 
+                      type="number" 
+                      id="Peso" 
+                      v-model="Peso" 
+                      class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" 
+                      required
+                      aria-required="true"
+                    >
+                  </div>
+                  <div>
+                    <label for="Talla" class="block text-black mb-1">Talla (m)</label>
+                    <input 
+                      type="number" 
+                      id="Talla" 
+                      v-model="Talla" 
+                      class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" 
+                      required
+                      aria-required="true"
+                    >
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="Edad" class="block text-black mb-1">Edad</label>
+                    <input 
+                      type="number" 
+                      id="Edad" 
+                      v-model="Edad" 
+                      class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" 
+                      required
+                      aria-required="true"
+                    >
+                  </div>
+                  <div>
+                    <label for="Presion_arterial" class="block text-black mb-1">Presión Arterial</label>
+                    <input 
+                      type="text" 
+                      id="Presion_arterial" 
+                      v-model="Presion_arterial" 
+                      class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" 
+                      required
+                      aria-required="true"
+                    >
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label for="Diagnostico" class="block text-black mb-1">Diagnóstico</label>
+                  <input 
+                    type="text" 
+                    id="Diagnostico" 
+                    v-model="Diagnostico" 
+                    class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" 
+                    required
+                    aria-required="true"
+                  >
+                </div>
+
+                <div class="mb-4">
+                  <label for="Prescripcion_Medica" class="block text-black mb-1">Prescripción Médica</label>
+                  <textarea 
+                    id="Prescripcion_Medica" 
+                    v-model="Prescripcion_Medica" 
+                    class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Botón de Enviar -->
+              <div class="mt-6 flex justify-start">
+                <button 
+                  type="submit" 
+                  class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900"
+                  aria-label="Generar Receta Médica"
+                >
+                  Generar Receta
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
+
   
   <script>
 /* eslint-disable */

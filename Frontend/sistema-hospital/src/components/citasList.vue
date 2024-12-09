@@ -1,64 +1,89 @@
 <template>
-    <div>
-      <div v-if="message" style="margin-top: 10px;">
-        {{ message }}
+  <div class="min-h-screen bg-gray-100 py-8">
+    <div class="container mx-auto">
+      <!-- Mensaje de acción -->
+      <div v-if="message" class="text-center text-lg text-red-500 p-4 rounded mb-4">
+      {{ message }}
+    </div>
+
+      <!-- Barra de búsqueda -->
+      <div class="flex justify-center mb-6">
+        <input 
+          type="text" 
+          v-model="textoBusqueda" 
+          @input="buscarCitas"
+          placeholder="Buscar por ID del paciente..." 
+          class="w-3/4 md:w-1/2 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+        />
       </div>
-  
-      <div class="container text-center">
-        <!-- Barra de búsqueda -->
-        <div style="margin-bottom: 10px;">
-          <input 
-            type="text" 
-            v-model="textoBusqueda" 
-            @input="buscarCitas"
-            placeholder="Buscar por Id del paciente..."
-            style="width: 80%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-        </div>
-      </div>
-      <br>
-  
-      <div class="tabla1">
-        <table>
+
+      <!-- Tabla -->
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse bg-white rounded-lg shadow-lg">
           <thead>
-            <tr>
-              <th>Id de la Cita</th>
-              <th>Id del Paciente</th>
-              <th>Hora de la Cita</th>
-              <th>Teléfono</th>
-              <th>Correo electrónico del contacto</th>
-              <th>Motivo de la Cita</th>
-              <th>Estatus</th>
-              <th>Acciones</th>
+            <tr class="bg-teal-500 text-white">
+              <th class="px-4 py-2">ID de la Cita</th>
+              <th class="px-4 py-2">ID del Paciente</th>
+              <th class="px-4 py-2">Hora de la Cita</th>
+              <th class="px-4 py-2">Teléfono</th>
+              <th class="px-4 py-2">Correo Electrónico</th>
+              <th class="px-4 py-2">Motivo</th>
+              <th class="px-4 py-2">Estatus</th>
+              <th class="px-4 py-2">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(Cita, index) in CitasFiltrados" :key="index">
-              <td>{{ Cita.ID }}</td>
-              <td>{{ Cita.Persona_ID }}</td>
-              <td>{{ Cita.Hora_Cita }}</td>
-              <td>{{ Cita.Telefono }}</td>
-              <td>{{ Cita.Correo_Electronico }}</td>
-              <td>{{ Cita.Motivo_Cita }}</td>
-              <td>{{ Cita.Estatus }}</td>
-              <td>
-              <button class="mt-2 flex justify-between botonEliminar" @click="eliminarCita(Cita.ID)">
-                <i ></i> Eliminar
-              </button>
-              &nbsp;&nbsp;&nbsp;
-
-              <router-link :to="{ name: 'editar', params: { id: Cita.ID } }">
-                <button class=" mt-2 flex justify-between botonEditar">
-                  <i></i> Editar
+            <tr 
+              v-for="(Cita, index) in CitasFiltrados" 
+              :key="index" 
+              class="hover:bg-gray-100"
+            >
+              <td class="px-4 py-2 text-center">{{ Cita.ID }}</td>
+              <td class="px-4 py-2 text-center">{{ Cita.Persona_ID }}</td>
+              <td class="px-4 py-2 text-center">{{ Cita.Hora_Cita }}</td>
+              <td class="px-4 py-2 text-center">{{ Cita.Telefono }}</td>
+              <td class="px-4 py-2 text-center">{{ Cita.Correo_Electronico }}</td>
+              <td class="px-4 py-2 text-center">{{ Cita.Motivo_Cita }}</td>
+              <td class="px-4 py-2 text-center">
+                <span 
+                  :class="{
+                    'text-green-500': Cita.Estatus === 'Activo',
+                    'text-yellow-500': Cita.Estatus === 'Suspendido',
+                    'text-red-500': Cita.Estatus === 'Bloqueado'
+                  }"
+                >
+                  {{ Cita.Estatus }}
+                </span>
+              </td>
+              <td class="px-4 py-2 text-center">
+                <!-- Botón Eliminar -->
+                <button 
+                  class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 mr-2"
+                  @click="eliminarCita(Cita.ID)"
+                >
+                  Eliminar
                 </button>
-              </router-link>
+                <!-- Botón Editar -->
+                <router-link :to="{ name: 'editar', params: { id: Cita.ID } }">
+                  <button 
+                    class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600"
+                  >
+                    Editar
+                  </button>
+                </router-link>
+              </td>
+            </tr>
+            <tr v-if="CitasFiltrados.length === 0">
+              <td colspan="8" class="px-4 py-4 text-center text-gray-500">
+                No se encontraron citas.
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-  
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   /* eslint-disable */

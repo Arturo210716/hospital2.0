@@ -1,53 +1,102 @@
 <template>
-  <div>
-    <div class="flex flex-col md:flex-row justify-center items-center">
-      <div class="w-max md:w-2/4 p-8">
-        <div class="border rounded-lg shadow-md p-6">
-          <form @submit.prevent="submitForm">
-            <h1 class="text-2xl font-bold text-black  mb-4">Registrar Citas:</h1>
+  <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="w-full max-w-4xl px-4">
+      <div class="bg-white border rounded-lg shadow-md p-6">
+        <form @submit.prevent="submitForm" class="space-y-6">
+          <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Registrar Citas</h1>
 
-            <div class="mb-6">
-              <div class="mt-4 py-2">
-                <div>
-                  <label for="Persona_ID" class="block text-gray-700 text-black mb-1">ID de la Persona</label>
-                  <input type="text" id="Persona_ID" v-model="Persona_ID" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Introduce el ID de la persona" required>
-                </div>
-              </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div>
-                  <label for="Hora_Cita" class="block text-gray-700 text-black mb-1">Hora de la cita</label>
-                  <input type="datetime-local" id="Hora_Cita" v-model="Hora_Cita" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                </div>
-                <div>
-                  <label for="Telefono" class="block text-gray-700 text-black mb-1">Número de Teléfono</label>
-                  <input type="tel" id="Telefono" v-model="Telefono" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="+52 xxx xxx xxxx" required>
-                </div>
-                <div>
-                  <label for="Correo_Electronico" class="block text-gray-700 text-black mb-1">Correo Electrónico</label>
-                  <input type="email" id="Correo_Electronico" v-model="Correo_Electronico" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="example@gmail.com" required>
-                </div>
-                <div>
-                  <label for="Estatus" class="block text-gray-700 text-black mb-1">Estatus</label>
-                  <select id="Estatus" v-model="Estatus" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                    <option value="Activo">Activo</option>
-                    <option value="Inactivo">Inactivo</option>
-                    <option value="Bloqueado">Bloqueado</option>
-                    <option value="Suspendido">Suspendido</option>
-                  </select>
-                </div>
-              </div>
+          <!-- Persona ID -->
+          <div>
+            <label for="Persona_ID" class="block text-gray-700 mb-1">ID de la Persona</label>
+            <input 
+              type="text" 
+              id="Persona_ID" 
+              v-model="Persona_ID" 
+              class="w-full rounded-lg border px-3 py-2 focus:ring-teal-500 focus:border-teal-500" 
+              placeholder="Introduce el ID de la persona" 
+              required>
+          </div>
 
-              <div class="mt-4">
-                <label for="Motivo_Cita" class="block text-gray-700 text-black mb-1">Motivo de la cita</label>
-                <textarea id="Motivo_Cita" v-model="Motivo_Cita" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Ingresa el motivo de la cita" required></textarea>
-              </div>
-
-              <div class="mt-8 flex justify-start">
-                <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-900">Agendar Cita</button>
-              </div>
+          <!-- Grid Layout for Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Hora de la Cita -->
+            <div>
+              <label for="Hora_Cita" class="block text-gray-700 mb-1">Hora de la cita</label>
+              <input 
+                type="datetime-local" 
+                id="Hora_Cita" 
+                v-model="Hora_Cita" 
+                class="w-full rounded-lg border px-3 py-2 focus:ring-teal-500 focus:border-teal-500" 
+                required>
             </div>
-          </form>
-        </div>
+            
+            <!-- Teléfono -->
+            <div>
+              <label for="Telefono" class="block text-gray-700 mb-1">Número de Teléfono</label>
+              <input 
+                type="tel" 
+                id="Telefono" 
+                v-model="Telefono" 
+                class="w-full rounded-lg border px-3 py-2 focus:ring-teal-500 focus:border-teal-500" 
+                placeholder="+52 xxx xxx xxxx" 
+                required>
+            </div>
+            
+            <!-- Correo Electrónico -->
+            <div>
+              <label for="Correo_Electronico" class="block text-gray-700 mb-1">Correo Electrónico</label>
+              <input 
+                type="email" 
+                id="Correo_Electronico" 
+                v-model="Correo_Electronico" 
+                class="w-full rounded-lg border px-3 py-2 focus:ring-teal-500 focus:border-teal-500" 
+                placeholder="example@gmail.com" 
+                required>
+            </div>
+
+            <!-- Estatus -->
+            <div>
+              <label for="Estatus" class="block text-gray-700 mb-1">Estatus</label>
+              <select 
+                id="Estatus" 
+                v-model="Estatus" 
+                class="w-full rounded-lg border px-3 py-2 focus:ring-teal-500 focus:border-teal-500" 
+                required>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+                <option value="Bloqueado">Bloqueado</option>
+                <option value="Suspendido">Suspendido</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Motivo de la Cita -->
+          <div>
+            <label for="Motivo_Cita" class="block text-gray-700 mb-1">Motivo de la cita</label>
+            <textarea 
+              id="Motivo_Cita" 
+              v-model="Motivo_Cita" 
+              class="w-full rounded-lg border px-3 py-2 focus:ring-teal-500 focus:border-teal-500" 
+              placeholder="Ingresa el motivo de la cita" 
+              required></textarea>
+          </div>
+
+          <!-- Botones -->
+          <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+            <button 
+              type="submit" 
+              class="w-full sm:w-auto bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600">
+              Agendar Cita
+            </button>
+            <router-link to="/citas" class="w-full sm:w-auto">
+              <button 
+                type="button" 
+                class="w-full bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
+                Ver Citas
+              </button>
+            </router-link>
+          </div>
+        </form>
       </div>
     </div>
   </div>

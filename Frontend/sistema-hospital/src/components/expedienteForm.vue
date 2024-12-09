@@ -1,57 +1,124 @@
 <template>
-    <div>
+  <div class="min-h-screen bg-gray-100 py-8">
+    <div class="container mx-auto">
       <div class="flex flex-col md:flex-row justify-center items-center">
-        <div class="w-max md:w-2/4 p-8">
-          <div class="border rounded-lg shadow-md p-6">
+        <div class="w-full md:w-2/3 lg:w-1/2 p-6">
+          <div class="bg-white border rounded-lg shadow-md p-6">
             <form @submit.prevent="submitForm">
-              <h1 class="text-2xl font-bold text-black mb-4">Registrar Expediente Médico:</h1>
-  
-              <div class="mb-6">
-                <div class="mt-4 py-2">
-                  <div>
-                    <label for="Persona_ID" class="block text-black mb-1">ID del Paciente</label>
-                    <input type="text" id="Persona_ID" v-model="Persona_ID" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Introduce el ID del paciente" required>
-                  </div>
+              <h1 class="text-2xl font-bold text-black mb-6">
+                Registrar Expediente Médico
+              </h1>
+
+              <!-- Campo ID del Paciente -->
+              <div class="mb-4">
+                <label for="Persona_ID" class="block text-gray-700 font-medium mb-2">
+                  ID del Paciente
+                </label>
+                <input
+                  type="text"
+                  id="Persona_ID"
+                  v-model="Persona_ID"
+                  class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
+                  placeholder="Introduce el ID del paciente"
+                  required
+                />
+              </div>
+
+              <!-- Campos en cuadrícula -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Hora de la Consulta -->
+                <div>
+                  <label for="Hora_Consulta" class="block text-gray-700 font-medium mb-2">
+                    Hora de la Consulta
+                  </label>
+                  <input
+                    type="datetime-local"
+                    id="Hora_Consulta"
+                    v-model="Hora_Consulta"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
+                    required
+                  />
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label for="Hora_Consulta" class="block text-black mb-1">Hora de la Consulta</label>
-                    <input type="datetime-local" id="Hora_Consulta" v-model="Hora_Consulta" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
-                  </div>
-                  <div>
-                    <label for="Diagnostico" class="block text-black mb-1">Diagnóstico</label>
-                    <input type="text" id="Diagnostico" v-model="Diagnostico" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Escribe el diagnóstico" required>
-                  </div>
-                  <div>
-                    <label for="Tratamiento_Relacionado" class="block text-black mb-1">Tratamiento Recomendado</label>
-                    <textarea id="Tratamiento_Relacionado" v-model="Tratamiento_Relacionado" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Describe el tratamiento recomendado" required></textarea>
-                  </div>
-                  <div>
-                  <label for="Estatus" class="block text-gray-700 text-black mb-1">Estatus</label>
-                  <select id="Estatus" v-model="Estatus" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" required>
+
+                <!-- Diagnóstico -->
+                <div>
+                  <label for="Diagnostico" class="block text-gray-700 font-medium mb-2">
+                    Diagnóstico
+                  </label>
+                  <input
+                    type="text"
+                    id="Diagnostico"
+                    v-model="Diagnostico"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
+                    placeholder="Escribe el diagnóstico"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Tratamiento y Estatus -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label for="Tratamiento_Relacionado" class="block text-gray-700 font-medium mb-2">
+                    Tratamiento Recomendado
+                  </label>
+                  <textarea
+                    id="Tratamiento_Relacionado"
+                    v-model="Tratamiento_Relacionado"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
+                    placeholder="Describe el tratamiento recomendado"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div>
+                  <label for="Estatus" class="block text-gray-700 font-medium mb-2">
+                    Estatus
+                  </label>
+                  <select
+                    id="Estatus"
+                    v-model="Estatus"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
+                    required
+                  >
                     <option value="Activo">Activo</option>
                     <option value="Inactivo">Inactivo</option>
                     <option value="Bloqueado">Bloqueado</option>
                     <option value="Suspendido">Suspendido</option>
                   </select>
                 </div>
-                </div>
-  
-                <div class="mt-4">
-                  <label for="Observaciones" class="block text-black mb-1">Observaciones</label>
-                  <textarea id="Observaciones" v-model="Observaciones" class="w-full rounded-lg border py-2 px-3 dark:bg-white-700 text-black dark:border" placeholder="Añade observaciones adicionales si es necesario"></textarea>
-                </div>
-  
-                <div class="mt-8 flex justify-start">
-                  <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-900">Registrar Expediente Médico</button>
-                </div>
+              </div>
+
+              <!-- Observaciones -->
+              <div class="mt-4">
+                <label for="Observaciones" class="block text-gray-700 font-medium mb-2">
+                  Observaciones
+                </label>
+                <textarea
+                  id="Observaciones"
+                  v-model="Observaciones"
+                  class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500"
+                  placeholder="Añade observaciones adicionales"
+                  rows="4"
+                ></textarea>
+              </div>
+
+              <!-- Botón de Enviar -->
+              <div class="mt-6 flex justify-start">
+                <button
+                  type="submit"
+                  class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 focus:ring-2 focus:ring-teal-500"
+                >
+                  Registrar Expediente Médico
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
 /* eslint-disable */

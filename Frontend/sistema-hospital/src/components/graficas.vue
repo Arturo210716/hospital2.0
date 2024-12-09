@@ -1,15 +1,37 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="column">
-        <canvas id="generoChart" width="400" height="400"></canvas>
-      </div>
-      <div class="column">
-        <canvas id="tipoSangreChart" width="400" height="400"></canvas>
-      </div>
+  <div class="charts-container">
+    <div class="chart">
+      <canvas id="generoChart" width="400" height="400"></canvas>
+    </div>
+    <div class="chart">
+      <canvas id="tipoSangreChart" width="400" height="400"></canvas>
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Contenedor para los gráficos */
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* Cada gráfico ocupa el 100% del ancho en pantallas pequeñas y 45% en pantallas más grandes */
+.chart {
+  flex: 1 1 calc(100% - 16px); /* 100% menos el espacio entre elementos */
+  max-width: 400px;
+}
+
+@media (min-width: 768px) {
+  .chart {
+    flex: 1 1 calc(45% - 16px); /* 45% menos el espacio entre elementos */
+  }
+}
+</style>
+
 
 <script>
 import Chart from "chart.js/auto";

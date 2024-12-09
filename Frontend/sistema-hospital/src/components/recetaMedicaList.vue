@@ -1,69 +1,75 @@
 <template>
-    <div>
-      <div v-if="message" style="margin-top: 10px;">
-        {{ message }}
-      </div>
-  
-      <div class="container text-center">
-        <!-- Barra de búsqueda -->
-        <div style="margin-bottom: 10px;">
-          <input 
-            type="text" 
-            v-model="textoBusqueda" 
-            @input="buscarRecetas"
-            placeholder="Buscar..."
-            style="width: 80%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-        </div>
-      </div>
-      <br>
-  
-      <div class="tabla1">
-        <table>
-          <thead>
-            <tr>
-              <th>Id de Receta</th>
-              <th>Nombre</th>
-              <th>Fecha de nacimiento</th>
-              <th>Peso</th>
-              <th>Talla</th>
-              <th>Edad</th>
-              <th>Presion arterial</th>
-              <th>Diagnostico</th>
-              <th>Prescripcion_Medica</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(Receta, index) in RecetasFiltrados" :key="index">
-              <td>{{ Receta.ID }}</td>
-              <td>{{ Receta.Nombre }}</td>
-              <td>{{ Receta.Fecha_Nacimiento }}</td>
-              <td>{{ Receta.Peso }}</td>
-              <td>{{ Receta.Talla }}</td>
-              <td>{{ Receta.Edad }}</td>
-              <td>{{ Receta.Presion_arterial }}</td>
-              <td>{{ Receta.Diagnostico }}</td>
-              <td>{{ Receta.Prescripcion_Medica }}</td>
-              <td>
-              <button class="mt-2 flex justify-between botonEliminar" @click="eliminarReceta(Receta.ID)">
-                <i ></i> Eliminar
-              </button>
-              &nbsp;&nbsp;&nbsp;
-
-              <router-link :to="{ name: 'editarR', params: { id: Receta.ID } }">
-                <button class=" mt-2 flex justify-between botonEditar">
-                  <i></i> Editar
-                </button>
-              </router-link>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-  
+  <div>
+    <!-- Mensaje Condicional -->
+    <div v-if="message" class="text-center text-lg text-red-500 mt-4">
+      {{ message }}
     </div>
-  </template>
 
+    <div class="container text-center">
+      <!-- Barra de búsqueda -->
+      <div style="margin-bottom: 10px;">
+        <input 
+          type="text" 
+          v-model="textoBusqueda" 
+          @input="buscarRecetas"
+          placeholder="Buscar recetas..."
+          class="w-4/5 md:w-1/2 py-2 px-4 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+        />
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Tabla de Recetas -->
+    <div class="tabla1 overflow-x-auto">
+      <table class="table-auto w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-teal-500 text-white">
+            <th class="px-4 py-2">Id de Receta</th>
+            <th class="px-4 py-2">Nombre</th>
+            <th class="px-4 py-2">Fecha de Nacimiento</th>
+            <th class="px-4 py-2">Peso</th>
+            <th class="px-4 py-2">Talla</th>
+            <th class="px-4 py-2">Edad</th>
+            <th class="px-4 py-2">Presión Arterial</th>
+            <th class="px-4 py-2">Diagnóstico</th>
+            <th class="px-4 py-2">Prescripción Médica</th>
+            <th class="px-4 py-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(Receta, index) in RecetasFiltrados" :key="Receta.ID">
+            <td class="px-4 py-2">{{ Receta.ID }}</td>
+            <td class="px-4 py-2">{{ Receta.Nombre }}</td>
+            <td class="px-4 py-2">{{ Receta.Fecha_Nacimiento }}</td>
+            <td class="px-4 py-2">{{ Receta.Peso }}</td>
+            <td class="px-4 py-2">{{ Receta.Talla }}</td>
+            <td class="px-4 py-2">{{ Receta.Edad }}</td>
+            <td class="px-4 py-2">{{ Receta.Presion_arterial }}</td>
+            <td class="px-4 py-2">{{ Receta.Diagnostico }}</td>
+            <td class="px-4 py-2">{{ Receta.Prescripcion_Medica }}</td>
+            <td class="px-4 py-2">
+              <!-- Botones de acción -->
+              <div class="flex flex-col sm:flex-row sm:space-x-2">
+                <button 
+                  class="mt-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+                  @click="eliminarReceta(Receta.ID)"
+                >
+                  Eliminar
+                </button>
+                <router-link :to="{ name: 'editarR', params: { id: Receta.ID } }">
+                  <button class="mt-2 bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700">
+                    Editar
+                  </button>
+                </router-link>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
 
   <script>
   /* eslint-disable */
