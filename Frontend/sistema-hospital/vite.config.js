@@ -8,28 +8,28 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
-      injectRegister: 'auto', // Inyección automática del código para registrar el service worker
+      injectRegister: 'auto',
       manifest: {
         name: 'Registros Médicos PWA',
         short_name: 'RM_PWA',
         description: 'PWA del hospital para registros médicos',
         start_url: '/',
-        display: 'standalone', // El comportamiento de la PWA como una app independiente
+        display: 'standalone',
         background_color: '#ffffff',
-        theme_color: '#4DBA87', // Color de la barra de navegación en dispositivos móviles
+        theme_color: '#4DBA87',
         icons: [
           {
-            src: '/img/icons/128x128.png', // Icono de 128x128px
+            src: '/img/icons/128x128.png',
             sizes: '128x128',
             type: 'image/png',
           },
           {
-            src: '/img/icons/512x512.png', // Icono de 512x512px
+            src: '/img/icons/512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: '/img/icons/192x192.png', // Agrega un icono adicional de 192x192px
+            src: '/img/icons/192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
@@ -50,8 +50,7 @@ export default defineConfig({
             },
           },
           {
-            // Caché para las peticiones a la API (modifica la URL según tu API)
-            urlPattern: /^https:\/\/api\.mi-backend\.com\/.*/,
+            urlPattern: /^https:\/\/backenhospital\.onrender\.com\/.*/,
             handler: 'NetworkFirst', // Intentar obtener los datos de la red primero
             options: {
               cacheName: 'api-cache',
@@ -63,9 +62,8 @@ export default defineConfig({
           },
         ],
       },
-      // Si deseas personalizar el service worker, puedes hacerlo aquí
       serviceWorker: {
-        src: '/service-worker.js', // Ruta personalizada si tienes un archivo service-worker.js
+        src: '/service-worker.js', 
       },
     }),
   ],
